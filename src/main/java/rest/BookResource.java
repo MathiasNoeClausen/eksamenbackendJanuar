@@ -12,6 +12,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -78,4 +79,11 @@ public class BookResource {
        BookDTO book = FACADE.addBook(b);
        return GSON.toJson(book);
    }
+   @DELETE
+   @Path("{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public String deletePerson(@PathParam("id") long id){
+        BookDTO pDeleted = FACADE.deleteBook(id);
+        return GSON.toJson(pDeleted);
+    }
 }

@@ -84,4 +84,17 @@ public class BookFacade {
             
             return new  BookDTO(book);
         }
+        
+        public BookDTO deleteBook(Long id) {
+            EntityManager em = emf.createEntityManager();
+            Book book = em.find(Book.class, id);
+            try {
+                em.getTransaction().begin();
+                em.remove(book);
+                em.getTransaction().commit();
+            } finally {
+                em.close();
+            }
+            return new BookDTO(book);
+        }
 }
