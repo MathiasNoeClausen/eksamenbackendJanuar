@@ -3,9 +3,11 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import dtos.BookDTO;
 import dtos.BooksDTO;
 import errorhandling.NotFoundException;
 import facades.BookFacade;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -53,11 +55,18 @@ public class BookResource {
         return GSON.toJson(books);
     }
     
+//    @GET
+//    @Path("{id}")
+//    @Produces({MediaType.APPLICATION_JSON})
+//        public String getBookById(@PathParam("id") Long id) throws NotFoundException {
+//        return GSON.toJson(FACADE.getBookById(id));
+//    }
+        
     @GET
-    @Path("{id}")
+    @Path("{title}")
     @Produces({MediaType.APPLICATION_JSON})
-        public String getBookById(@PathParam("id") Long id) throws NotFoundException {
-        return GSON.toJson(FACADE.getBookById(id));
+        public String getBookByTitle(@PathParam("title") String title){
+        
+        return GSON.toJson(FACADE.getBookByTitle(title));
     }
-
 }

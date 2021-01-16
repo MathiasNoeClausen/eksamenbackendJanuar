@@ -7,6 +7,7 @@ import entities.Book;
 import errorhandling.NotFoundException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 
 public class BookFacade {
     
@@ -58,5 +59,14 @@ public class BookFacade {
             } finally {
                 em.close();
             }
+        }
+        public BookDTO getBookByTitle(String title){
+            EntityManager em = emf.createEntityManager();
+            TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.title LIKE :title", Book.class);
+            query.setParameter("title", "%"+title+"%");
+            Book book = query.getSingleResult();
+            
+            
+            return new  BookDTO(book);
         }
 }
