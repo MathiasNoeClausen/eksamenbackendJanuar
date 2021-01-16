@@ -70,7 +70,7 @@ public class BookResource {
         
         return GSON.toJson(FACADE.getBookByTitle(title));
     }
-        
+       // 
    @POST   
    @Produces({MediaType.APPLICATION_JSON})
    @Consumes({MediaType.APPLICATION_JSON})
