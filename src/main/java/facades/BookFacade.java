@@ -44,22 +44,37 @@ public class BookFacade {
         } finally {
             em.close();
         }
+        
 
     
 }
-        public BookDTO getBookById(Long id) throws NotFoundException {
+           public BookDTO addBook(BookDTO b) {
             EntityManager em = emf.createEntityManager();
+            Book book = new Book(b.getTitle(),b.getAuthor(),b.getPublisher(),b.getPublishYear());
+            
             try {
-                Book book = em.find(Book.class, id);
-                if (book == null) {
-                    throw new NotFoundException(String.format("Book with id: (%d) not found.", id));
-                } else {
-                    return new BookDTO(book);
-                }
+            
+            em.getTransaction().begin();
+            em.persist(book);
+            em.getTransaction().commit();
             } finally {
                 em.close();
             }
+            return new BookDTO(book);
         }
+//        public BookDTO getBookById(Long id) throws NotFoundException {
+//            EntityManager em = emf.createEntityManager();
+//            try {
+//                Book book = em.find(Book.class, id);
+//                if (book == null) {
+//                    throw new NotFoundException(String.format("Book with id: (%d) not found.", id));
+//                } else {
+//                    return new BookDTO(book);
+//                }
+//            } finally {
+//                em.close();
+//            }
+//        }
         public BookDTO getBookByTitle(String title){
             EntityManager em = emf.createEntityManager();
             TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.title LIKE :title", Book.class);
