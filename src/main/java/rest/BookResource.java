@@ -82,8 +82,8 @@ public class BookResource {
    @DELETE
    @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public String deletePerson(@PathParam("id") long id){
-        BookDTO pDeleted = FACADE.deleteBook(id);
-        return GSON.toJson(pDeleted);
+    public String deletePerson(@PathParam("id") Long id){
+        BookDTO bookDeleted = FACADE.deleteBook(id);
+        return GSON.toJson(bookDeleted);
     }
 }
