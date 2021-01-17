@@ -90,7 +90,7 @@ public class BookFacadeTest {
     public void testABook() {
 
         // går ud fra den tester på plads i arrayet siden index skal være 1
-         assertEquals(b1.getTitle(), facade.getAllBooks().getAll().get(1).getTitle());
+         assertEquals(b1.getTitle(), facade.getAllBooks().getAll().get(0).getTitle());
                 
     }
     
